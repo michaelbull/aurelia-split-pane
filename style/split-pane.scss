@@ -1,5 +1,7 @@
 $split-pane-divider-width: 11px !default;
 $split-pane-overflow: auto !default;
+$split-pane-horizontal-cursor: col-resize !default;
+$split-pane-vertical-cursor: row-resize !default;
 
 .split-pane {
   display: flex;
@@ -44,9 +46,9 @@ $split-pane-overflow: auto !default;
 }
 
 .split-pane__divider--horizontal {
-  cursor: col-resize;
+  cursor: $split-pane-horizontal-cursor;
 }
 
 .split-pane__divider--vertical {
-  cursor: row-resize;
+  cursor: $split-pane-vertical-cursor;
 }
