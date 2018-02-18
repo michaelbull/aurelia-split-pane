@@ -1,0 +1,76 @@
+{
+  "name": "aurelia-split-pane",
+  "version": "0.0.0",
+  "description": "A custom element for resizable split panes.",
+  "keywords": [
+    "aurelia",
+    "custom",
+    "element",
+    "split",
+    "pane",
+    "resizable",
+    "panel",
+    "container"
+  ],
+  "homepage": "https://github.com/michaelbull/aurelia-split-pane",
+  "bugs": {
+    "url": "https://github.com/michaelbull/aurelia-split-pane/issues"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Michael Bull",
+    "url": "https://www.michael-bull.com"
+  },
+  "files": [
+    "dist",
+    "src",
+    "style"
+  ],
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michaelbull/aurelia-split-pane"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --env=dev --inline --hot",
+    "build": "webpack --env=prod",
+    "tsc": "tsc --project tsconfig.build.json",
+    "html": "copyfiles --up 1 src/**/*.html dist",
+    "sass": "node-sass style/split-pane.scss dist/split-pane.css",
+    "postcss": "postcss dist/*.css --dir dist",
+    "dist": "rimraf dist && npm run tsc && npm run html && npm run sass && npm run postcss",
+    "deploy": "rimraf build && npm run build && push-dir --dir=build --branch=gh-pages",
+    "prepublish": "npm run dist"
+  },
+  "devDependencies": {
+    "@types/webpack": "3.8.8",
+    "@types/webpack-env": "1.13.5",
+    "aurelia-bootstrapper": "2.2.0",
+    "aurelia-event-aggregator": "1.0.1",
+    "aurelia-framework": "1.1.5",
+    "aurelia-history-browser": "1.1.0",
+    "aurelia-logging-console": "1.0.0",
+    "aurelia-templating-binding": "1.4.1",
+    "aurelia-templating-resources": "1.5.4",
+    "aurelia-templating-router": "1.3.1",
+    "aurelia-webpack-plugin": "2.0.0-rc.5",
+    "awesome-typescript-loader": "3.4.1",
+    "bootstrap": "4.0.0",
+    "copyfiles": "1.2.0",
+    "css-loader": "0.28.9",
+    "cssnano": "3.10.0",
+    "cssnano-preset-advanced": "4.0.0-rc.2",
+    "extract-text-webpack-plugin": "3.0.2",
+    "html-loader": "0.5.5",
+    "html-webpack-plugin": "2.30.1",
+    "node-sass": "4.7.2",
+    "postcss-cli": "5.0.0",
+    "push-dir": "0.4.1",
+    "rimraf": "2.6.2",
+    "sass-loader": "6.0.6",
+    "style-loader": "0.20.2",
+    "typescript": "2.7.2",
+    "webpack": "3.11.0",
+    "webpack-dev-server": "2.11.1"
+  }
+}
