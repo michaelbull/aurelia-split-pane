@@ -1,5 +1,5 @@
 $split-pane-divider-width: 11px !default;
-$split-pane-overflow: auto;
+$split-pane-overflow: auto !default;
 
 .split-pane {
   display: flex;
