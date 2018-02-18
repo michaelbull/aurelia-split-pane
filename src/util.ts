@@ -1,15 +1,15 @@
-const FLEX_BASIS_VENDOR_PROPERTIES = [
-    'webkitFlexBasis',
-    'msFlexPreferredSize'
-];
-
 function flexBasis(): string {
-    for (let property in FLEX_BASIS_VENDOR_PROPERTIES) {
-        if (property in document.documentElement.style) {
-            return property;
-        }
+    let style = document.documentElement.style;
+
+    if ('flexBasis' in style) {
+        return 'flexBasis'
+    } else if ('webkitFlexBasis' in style) {
+        return 'webkitFlexBasis';
+    } else if ('msFlexPreferredSize' in style) {
+        return 'msFlexPreferredSize';
+    } else {
+        return 'flexBasis';
     }
-    return 'flexBasis';
 }
 
 export function setFlexBasis(element: Element, basis: number): void {
