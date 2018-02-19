@@ -104,7 +104,7 @@ export class SplitPane implements ComponentBind, ComponentAttached, ComponentDet
             });
 
             this.dividers.push(dividerView);
-            child.insertAdjacentElement('afterend', divider);
+            child.parentNode.insertBefore(divider, child.nextSibling);
         }
     }
 }
