@@ -12,7 +12,7 @@ Tested to work on the following browser versions:
 
 | <img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/45.3.0/edge/edge.svg" alt="IE / Edge" width="16px" height="16px" /><br />IE / Edge | <img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/45.3.0/firefox/firefox.svg" alt="Firefox" width="16px" height="16px" /><br />Firefox | <img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/45.3.0/chrome/chrome.svg" alt="Chrome" width="16px" height="16px" /><br />Chrome | <img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/45.3.0/opera/opera.svg" alt="Opera" width="16px" height="16px" /><br />Opera |
 |:----:|:---:|:---:|:---:|
-| Edge | 30+ | 32+ | 20+ |
+| Edge | 29+ | 32+ | 20+ |
 
 ## Installation
 
