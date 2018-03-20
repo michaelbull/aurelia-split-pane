@@ -1,4 +1,4 @@
-$split-pane-divider-width: 11px !default;
+$split-pane-divider-size: 11px !default;
 $split-pane-overflow: auto !default;
 $split-pane-horizontal-cursor: col-resize !default;
 $split-pane-vertical-cursor: row-resize !default;
@@ -36,7 +36,7 @@ $split-pane-vertical-cursor: row-resize !default;
 }
 
 .split-pane__divider {
-  flex: 0 0 $split-pane-divider-width;
+  flex: 0 0 $split-pane-divider-size;
 
   overflow: hidden;
   touch-action: pan-y;
