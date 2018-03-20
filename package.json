@@ -27,6 +27,7 @@
     "style"
   ],
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/michaelbull/aurelia-split-pane"
