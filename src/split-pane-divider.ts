@@ -1,23 +1,31 @@
 import {
-    autoinject,
     ComponentBind,
     ComponentDetached,
-    DOM
+    customElement,
+    DOM,
+    inject
 } from 'aurelia-framework';
 import { SplitPane } from './split-pane';
 import { setFlexBasis } from './util';
 
-@autoinject()
+@inject(DOM.Element)
+@customElement(SplitPaneDivider.TAG_NAME)
 export class SplitPaneDivider implements ComponentBind, ComponentDetached {
+    static readonly TAG_NAME = 'split-pane-divider';
+
+    static isDivider(element: Element): boolean {
+        return element.tagName.toLowerCase() === SplitPaneDivider.TAG_NAME;
+    }
+
     parent!: SplitPane;
 
-    private startCoordinate: number = 0;
-    private previousSiblingSize: number = 0;
-    private nextSiblingSize: number = 0;
+    private startCoordinate = 0;
+    private previousSiblingSize = 0;
+    private nextSiblingSize = 0;
 
-    private element: Element;
+    private readonly element: Element;
 
-    constructor(element: Element) {
+    constructor(element: any) {
         this.element = element;
     }
 
@@ -31,6 +39,11 @@ export class SplitPaneDivider implements ComponentBind, ComponentDetached {
 
     mouseDown(event: MouseEvent): void {
         if (event.button === 0 && this.startDrag(event.clientX, event.clientY)) {
+
+            // style rules may have affected the flex-basis of the children,
+            // so recalculate them now we are starting a drag
+            this.parent.setChildrenFlexBasis();
+
             DOM.addEventListener('mousemove', this.mouseMove, false);
             DOM.addEventListener('mouseup', this.stopDrag, false);
         }
@@ -40,6 +53,11 @@ export class SplitPaneDivider implements ComponentBind, ComponentDetached {
         let touch = event.touches[0];
 
         if (this.startDrag(touch.clientX, touch.clientY)) {
+
+            // style rules may have affected the flex-basis of the children,
+            // so recalculate them now we are starting a drag
+            this.parent.setChildrenFlexBasis();
+
             DOM.addEventListener('touchmove', this.touchMove, false);
             DOM.addEventListener('touchend', this.stopDrag, false);
         }
@@ -50,25 +68,25 @@ export class SplitPaneDivider implements ComponentBind, ComponentDetached {
         let next = this.element.nextElementSibling;
 
         if (prev !== null && next !== null) {
-
-            // style rules may have affected the flex-basis of the children,
-            // so recalculate them now we are starting a drag
-            this.parent.setChildrenFlexBasis();
-
             let prevRect = prev.getBoundingClientRect();
             let nextRect = next.getBoundingClientRect();
 
-            if (this.parent.isHorizontal()) {
-                this.startCoordinate = clientX;
-                this.previousSiblingSize = prevRect.width;
-                this.nextSiblingSize = nextRect.width;
-            } else if (this.parent.isVertical()) {
-                this.startCoordinate = clientY;
-                this.previousSiblingSize = prevRect.height;
-                this.nextSiblingSize = nextRect.height;
-            }
+            switch (this.parent.direction) {
+                case 'horizontal':
+                    this.startCoordinate = clientX;
+                    this.previousSiblingSize = prevRect.width;
+                    this.nextSiblingSize = nextRect.width;
+                    return true;
 
-            return true;
+                case 'vertical':
+                    this.startCoordinate = clientY;
+                    this.previousSiblingSize = prevRect.height;
+                    this.nextSiblingSize = nextRect.height;
+                    return true;
+
+                default:
+                    return false;
+            }
         } else {
             return false;
         }
@@ -90,7 +108,7 @@ export class SplitPaneDivider implements ComponentBind, ComponentDetached {
     };
 
     private drag(clientX: number, clientY: number): void {
-        let currentCoordinate = this.parent.isHorizontal() ? clientX : clientY;
+        let currentCoordinate = this.parent.direction === 'horizontal' ? clientX : clientY;
         let delta = currentCoordinate - this.startCoordinate;
 
         let prev = this.element.previousElementSibling;

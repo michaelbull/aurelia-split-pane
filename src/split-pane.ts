@@ -1,50 +1,51 @@
 import {
-    autoinject,
     bindable,
+    bindingMode,
     ComponentAttached,
-    ComponentBind,
     ComponentDetached,
     ComponentUnbind,
+    customElement,
     DOM,
+    inject,
     TemplatingEngine,
     View
 } from 'aurelia-framework';
+import { SplitPaneDivider } from './split-pane-divider';
 import { setFlexBasis } from './util';
 
 export type Direction = 'horizontal' | 'vertical';
 
-const DIVIDER_TAG_NAME = 'SPLIT-PANE-DIVIDER';
+@inject(DOM.Element, TemplatingEngine)
+@customElement('split-pane')
+export class SplitPane implements ComponentAttached, ComponentDetached, ComponentUnbind {
 
-@autoinject()
-export class SplitPane implements ComponentBind, ComponentAttached, ComponentDetached, ComponentUnbind {
-    @bindable() direction!: Direction;
+    @bindable({ defaultBindingMode: bindingMode.toView })
+    direction: Direction = 'horizontal';
 
-    private dividers: View[] = [];
+    private readonly dividers: View[] = [];
+    private readonly element: HTMLElement;
+    private readonly templatingEngine: TemplatingEngine;
 
-    private element: HTMLElement;
-    private templatingEngine: TemplatingEngine;
-
-    constructor(element: Element, templatingEngine: TemplatingEngine) {
-        this.element = element as HTMLElement;
+    constructor(element: any, templatingEngine: TemplatingEngine) {
+        this.element = element;
         this.templatingEngine = templatingEngine;
     }
 
-    isHorizontal() {
-        return this.direction === 'horizontal';
-    }
-
-    isVertical() {
-        return this.direction === 'vertical';
-    }
-
-    bind(): void {
-        if (this.direction === undefined) {
-            this.direction = 'horizontal';
-        }
-    }
-
     attached(): void {
-        this.addDividers();
+        let children = Array.prototype.slice.call(this.element.children);
+
+        for (let i = 0; i < children.length - 1; i++) {
+            let child = children[i];
+
+            let divider = DOM.createElement(SplitPaneDivider.TAG_NAME);
+            let dividerView = this.templatingEngine.enhance({
+                element: divider,
+                bindingContext: this
+            });
+
+            this.dividers.push(dividerView);
+            this.element.insertBefore(divider, child.nextSibling);
+        }
     }
 
     detached(): void {
@@ -65,7 +66,6 @@ export class SplitPane implements ComponentBind, ComponentAttached, ComponentDet
      * modified during a [drag]{@link SplitPaneDivider#drag}.
      */
     setChildrenFlexBasis() {
-        let horizontal = this.isHorizontal();
         let children = this.element.children;
         let sizes: number[] = [];
 
@@ -73,11 +73,11 @@ export class SplitPane implements ComponentBind, ComponentAttached, ComponentDet
         for (let i = 0; i < children.length; i++) {
             let child = children.item(i);
 
-            if (child.tagName === DIVIDER_TAG_NAME) {
+            if (SplitPaneDivider.isDivider(child)) {
                 sizes.push(0);
             } else {
                 let rect = child.getBoundingClientRect();
-                sizes.push(horizontal ? rect.width : rect.height);
+                sizes.push(this.direction === 'horizontal' ? rect.width : rect.height);
             }
         }
 
@@ -85,26 +85,9 @@ export class SplitPane implements ComponentBind, ComponentAttached, ComponentDet
         for (let i = 0; i < children.length; i++) {
             let child = children.item(i);
 
-            if (child.tagName !== DIVIDER_TAG_NAME) {
+            if (!SplitPaneDivider.isDivider(child)) {
                 setFlexBasis(child, sizes[i]);
             }
-        }
-    }
-
-    private addDividers() {
-        let children = Array.prototype.slice.call(this.element.children);
-
-        for (let i = 0; i < children.length - 1; i++) {
-            let child = children[i];
-
-            let divider = DOM.createElement(DIVIDER_TAG_NAME);
-            let dividerView = this.templatingEngine.enhance({
-                element: divider,
-                bindingContext: this
-            });
-
-            this.dividers.push(dividerView);
-            child.parentNode.insertBefore(divider, child.nextSibling);
         }
     }
 }
