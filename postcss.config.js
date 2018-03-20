@@ -4,7 +4,10 @@ module.exports = {
             preset: [
                 'advanced',
                 {
-                    autoprefixer: { add: true }
+                    autoprefixer: {
+                        add: true,
+                        remove: false
+                    }
                 }
             ]
         }

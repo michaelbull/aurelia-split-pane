@@ -33,7 +33,7 @@ export function configure(aurelia: Aurelia): void {
 Import the [Sass][sass] stylesheet:
 
 ```sass
-@import '~aurelia-split-pane/style/split-pane';
+@import '~aurelia-split-pane/style';
 ```
 
 ## Usage

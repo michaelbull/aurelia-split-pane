@@ -9,3 +9,7 @@ export function configure(config: FrameworkConfiguration): void {
         PLATFORM.moduleName('./split-pane-divider')
     ]);
 }
+
+export * from './split-pane';
+export * from './split-pane-divider';
+export * from './util';
