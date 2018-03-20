@@ -44,7 +44,7 @@
     "postbuild:sass": "postcss dist/*.css --dir dist",
     "prebuild": "rimraf dist",
     "build": "npm-run-all --parallel build:*",
-    "predeploy": "npm run dist",
+    "predeploy": "npm run build",
     "deploy": "push-dir --dir=dist/example --branch=gh-pages",
     "prepublishOnly": "npm run build"
   },
