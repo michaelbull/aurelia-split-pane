@@ -1,0 +1,55 @@
+<template>
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Aurelia Split Pane</h1>
+      <p class="lead">A custom element for resizable split panes.</p>
+      <p>
+        <a class="btn btn-lg btn-outline-primary" href="https://github.com/michaelbull/aurelia-split-pane" rel="nofollow">
+          GitHub
+        </a>
+        <a class="btn btn-lg btn-outline-danger" href="https://www.npmjs.com/package/aurelia-split-pane" rel="nofollow">
+          npm
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 class="display-4">Simple Example</h2>
+    <p class="lead">The example below demonstrates a horizontally split pane with direction variable bound to the view-model. The <code>flex-basis</code> property is set to <code>30%</code> and <code>70%</code> for panes A & B respectively. The 30/70 distribution remains even after changing the split direction.</p>
+
+    <p>Direction: ${direction}</p>
+    <p>
+      <button type="button" class="btn btn-outline-primary" click.delegate="toggleDirection()">
+        Toggle Direction
+      </button>
+    </p>
+
+    <div class="simple-example">
+      <split-pane direction.bind="direction">
+        <div class="simple-example__a">Pane A</div>
+        <div class="simple-example__b">Pane B</div>
+      </split-pane>
+    </div>
+
+    <h2 class="display-4">Nested Example</h2>
+    <p class="lead">Unlike the simple example, the panes in the example below have no pre-defined <code>flex-basis</code>, and thus distribute themselves equally. The dividers have also been customized to include a visual cue in the form of a <code>background-image</code>.</p>
+
+    <div class="nested-example">
+      <split-pane>
+        <split-pane direction="vertical">
+          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque dolorem dolorum, illo odit possimus quo sed soluta vitae. Cumque in nostrum pariatur quas vero! A accusantium commodi molestias ratione repudiandae!</div>
+          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquid, architecto earum ex officiis quo velit. Adipisci culpa ea, eius fugit id ipsam nisi officia, officiis repellendus repudiandae, sequi ut.</div>
+          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem blanditiis dicta error esse est et ex mollitia nemo neque qui! Explicabo, nobis numquam. Debitis, rerum, saepe. Aut harum molestiae odit!</div>
+        </split-pane>
+
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, autem blanditiis consectetur consequuntur corporis dolor doloremque dolores doloribus illo nemo nihil pariatur quaerat ratione, repellendus, saepe ut veniam voluptatum? Ex! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque culpa eaque nostrum, numquam quod reiciendis vero. Ab accusamus animi consequuntur cumque dolores doloribus, ducimus ipsam minima, modi natus nobis rerum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut autem debitis deserunt enim eos et fugiat, illum ipsa iusto labore pariatur perferendis possimus quam reiciendis sunt totam ullam. Beatae, neque. A accusantium dolorum ducimus est iure minima neque officia perspiciatis vero?</div>
+
+        <split-pane direction="vertical">
+          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam consequuntur dolorum eaque eligendi error eveniet fugit, ipsam laudantium minus neque provident quo repellendus sint suscipit tempore ullam veniam voluptas? Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, architecto culpa cupiditate deserunt earum eius est excepturi itaque iure laborum mollitia necessitatibus obcaecati perspiciatis quibusdam sit tenetur vitae voluptate voluptatibus.</div>
+        </split-pane>
+      </split-pane>
+    </div>
+  </div>
+</template>

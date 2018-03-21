@@ -1,0 +1,13 @@
+<template>
+  <h2>Messages</h2>
+  <hr />
+
+  <p if.bind="messages.length === 0">No messages</p>
+
+  <template repeat.for="message of messages">
+    <h4>${message.title}</h4>
+    <span>${message.author.name}</span>
+    <p>${message.content}&hellip;</p>
+    <hr />
+  </template>
+</template>

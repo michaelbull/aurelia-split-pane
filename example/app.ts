@@ -1,10 +1,24 @@
-import { Direction } from '../src/split-pane';
+import { PLATFORM } from 'aurelia-framework';
+import {
+    ConfiguresRouter,
+    Router,
+    RouterConfiguration
+} from 'aurelia-router';
 import './app.scss';
 
-export class App {
-    direction: Direction = 'horizontal';
-
-    toggleDirection(): void {
-        this.direction = this.direction === 'horizontal' ? 'vertical' : 'horizontal';
+export class App implements ConfiguresRouter {
+    configureRouter(config: RouterConfiguration, router: Router): void {
+        config.mapRoute({
+            route: '',
+            name: 'example',
+            moduleId: PLATFORM.moduleName('./pages/example/index')
+        }).mapRoute({
+            route: 'inbox',
+            name: 'inbox',
+            moduleId: PLATFORM.moduleName('./pages/inbox/index')
+        }).mapUnknownRoutes({
+            route: 'unknown',
+            redirect: ''
+        });
     }
 }

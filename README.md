@@ -38,7 +38,7 @@ Import the [Sass][sass] stylesheet:
 
 ## Usage
 
-The demo contains [two usage examples][examples].
+The demo contains [two simple usage examples][examples].
 
 Below are a couple of simple examples:
 
@@ -61,6 +61,14 @@ Below are a couple of simple examples:
 </split-pane>
 ```
 
+#### Usage with Viewports
+
+Viewport configurations are an effective way of decoupling sections of your application, and can be used in conjunction
+with `aurelia-split-pane`, where each pane is effectively a viewport. An example of a message inbox, where the list of
+contacts and list of messages are both distinct viewports, is available [here][inbox]. The inbox [view][inbox-view]
+demonstrates how to use the `<router-view>` element as a pane within a `<split-pane>` element. Aurelia team member
+Matthew James Davis has an article providing an in-depth look into viewports, found [here][master-detail].
+
 ## Contributing
 
 Bug reports and pull requests are welcome on [GitHub][github].
@@ -74,5 +82,8 @@ This project is available under the terms of the ISC license. See the
 [npm]: https://www.npmjs.com/package/aurelia-split-pane
 [aurelia]: http://aurelia.io/
 [sass]: http://sass-lang.com/
-[examples]: https://github.com/michaelbull/aurelia-split-pane/blob/master/example/app.html#L28
+[examples]: https://github.com/michaelbull/aurelia-split-pane/blob/master/example/pages/example/index.html#L28
 [github]: https://github.com/michaelbull/aurelia-split-pane
+[inbox]: https://michaelbull.github.io/aurelia-split-pane/#/inbox
+[inbox-view]: https://github.com/michaelbull/aurelia-split-pane/blob/master/example/pages/inbox/index.html#L7
+[master-detail]: http://davismj.me/blog/master-detail/

@@ -1,0 +1,9 @@
+<template>
+  <h2>Contacts</h2>
+
+  <ul>
+    <li repeat.for="contact of contacts">
+      <a route-href="route: messages; params.bind: { contact: contact.id }">${ contact.name }</a>
+    </li>
+  </ul>
+</template>

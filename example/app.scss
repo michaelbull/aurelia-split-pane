@@ -12,27 +12,31 @@ $font-family-sans-serif: (
 @import '~bootstrap/scss/bootstrap';
 @import '../style';
 
-.split-pane > div {
-  padding: 1em;
-  background: $gray-200 no-repeat center;
-}
-
 .simple-example {
   height: 200px;
   margin-bottom: 8em;
 }
 
 .simple-example__a {
+  padding: 1em;
   flex-basis: 30%;
+  background: $gray-200;
 }
 
 .simple-example__b {
+  padding: 1em;
   flex-basis: 70%;
+  background: $gray-200;
 }
 
 .nested-example {
   height: 500px;
   margin-bottom: 8em;
+
+  div {
+    padding: 1em;
+    background: $gray-200;
+  }
 
   .split-pane__divider {
     background: no-repeat center center;
@@ -45,4 +49,25 @@ $font-family-sans-serif: (
   .split-pane__divider--vertical {
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFCAMAAABl/6zIAAAABlBMVEUAAADMzMzIT8AyAAAAAXRSTlMAQObYZgAAABRJREFUeAFjYGRkwIMJSeMHlBkOABP7AEGzSuPKAAAAAElFTkSuQmCC');
   }
+}
+
+.inbox {
+  height: 600px;
+}
+
+.inbox__title,
+.inbox__messages,
+.inbox__contacts {
+  padding: 1em;
+  background: $gray-200;
+}
+
+.inbox__title {
+  flex-basis: 120px;
+  min-height: 120px;
+}
+
+.inbox__contacts {
+  flex-basis: 300px;
+  min-width: 300px;
 }

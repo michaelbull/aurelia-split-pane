@@ -1,0 +1,12 @@
+<template>
+  <split-pane direction="vertical">
+    <div class="inbox__title">
+      <h1 class="display-3">Inbox</h1>
+    </div>
+
+    <split-pane class="inbox">
+      <router-view class="inbox__contacts" name="contacts"></router-view>
+      <router-view class="inbox__messages" name="messages"></router-view>
+    </split-pane>
+  </split-pane>
+</template>
