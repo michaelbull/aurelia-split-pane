@@ -39,7 +39,6 @@ $split-pane-vertical-cursor: row-resize !default;
   flex: 0 0 $split-pane-divider-size;
 
   overflow: hidden;
-  touch-action: pan-y;
   user-select: none;
   -webkit-user-drag: none;
   -webkit-tap-highlight-color: transparent;
@@ -47,8 +46,10 @@ $split-pane-vertical-cursor: row-resize !default;
 
 .split-pane__divider--horizontal {
   cursor: $split-pane-horizontal-cursor;
+  touch-action: pan-y;
 }
 
 .split-pane__divider--vertical {
   cursor: $split-pane-vertical-cursor;
+  touch-action: pan-x;
 }
