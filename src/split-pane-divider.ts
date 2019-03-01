@@ -5,10 +5,12 @@ import {
     DOM,
     inject
 } from 'aurelia-framework';
+import { ResizeEvent } from './resize-event';
 import { SplitPane } from './split-pane';
 import { setFlexBasis } from './util';
+import { EventAggregator } from 'aurelia-event-aggregator';
 
-@inject(DOM.Element)
+@inject(DOM.Element, EventAggregator)
 @customElement(SplitPaneDivider.TAG_NAME)
 export class SplitPaneDivider implements ComponentBind, ComponentDetached {
     static readonly TAG_NAME = 'split-pane-divider';
@@ -24,9 +26,11 @@ export class SplitPaneDivider implements ComponentBind, ComponentDetached {
     private nextSiblingSize = 0;
 
     private readonly element: Element;
+    private readonly events: EventAggregator;
 
-    constructor(element: any) {
+    constructor(element: any, events: EventAggregator) {
         this.element = element;
+        this.events = events;
     }
 
     bind(bindingContext: SplitPane): void {
@@ -130,6 +134,13 @@ export class SplitPaneDivider implements ComponentBind, ComponentDetached {
 
             setFlexBasis(prev, prevSize);
             setFlexBasis(next, nextSize);
+
+            let resizeEvent: ResizeEvent = {
+                clientX,
+                clientY
+            };
+
+            this.events.publish('split-pane:resize', resizeEvent);
         }
     }
 

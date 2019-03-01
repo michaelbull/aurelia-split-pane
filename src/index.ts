@@ -10,6 +10,7 @@ export function configure(config: FrameworkConfiguration): void {
     ]);
 }
 
+export * from './resize-event';
 export * from './split-pane';
 export * from './split-pane-divider';
 export * from './util';
