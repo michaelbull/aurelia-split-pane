@@ -1,6 +1,6 @@
 {
   "name": "aurelia-split-pane",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A custom element for resizable split panes.",
   "keywords": [
     "aurelia",
