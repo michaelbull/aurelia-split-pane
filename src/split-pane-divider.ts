@@ -80,12 +80,14 @@ export class SplitPaneDivider implements ComponentBind, ComponentDetached {
                     this.startCoordinate = clientX;
                     this.previousSiblingSize = prevRect.width;
                     this.nextSiblingSize = nextRect.width;
+                    this.events.publish('split-pane:start');
                     return true;
 
                 case 'vertical':
                     this.startCoordinate = clientY;
                     this.previousSiblingSize = prevRect.height;
                     this.nextSiblingSize = nextRect.height;
+                    this.events.publish('split-pane:start');
                     return true;
 
                 default:
@@ -108,6 +110,7 @@ export class SplitPaneDivider implements ComponentBind, ComponentDetached {
     };
 
     private stopDrag = (): void => {
+        this.events.publish('split-pane:stop');
         this.removeListeners();
     };
 
