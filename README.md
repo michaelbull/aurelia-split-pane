@@ -30,10 +30,27 @@ export function configure(aurelia: Aurelia): void {
 }
 ```
 
+For jspm (v16 tested), add the following to your systemjs config.js file
+
+```json
+"aurelia-split-pane": {
+    "map": {
+      "./split-pane": "./dist/split-pane",
+      "./split-pane-divider": "./dist/split-pane-divider"
+    }
+  }
+```
+
 Import the [Sass][sass] stylesheet:
 
 ```sass
 @import '~aurelia-split-pane/style';
+```
+
+For aurelia components that make use of this component, you can import the css stylesheet in your HTML component template like so:
+
+```html
+<require from="aurelia-split-pane/dist/split-pane.css"></require>
 ```
 
 ## Usage
